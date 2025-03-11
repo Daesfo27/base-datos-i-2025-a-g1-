@@ -20,6 +20,7 @@ Después de completar este módulo, debería ser capaz de:
 estos datos son fundamentales por que mejoran la estabilidad de una empresa o proyecto, los datos están en todas partes y tienen un enorme valor para empresas, gobiernos y organizaciones. Ayudan a mejorar operaciones, entender a los clientes, reducir costos y encontrar nuevas oportunidades. No solo impulsan negocios, sino que también pueden abordar problemas globales como la pobreza y el cambio climático.
 
 Los analistas de datos juegan un papel clave al dar sentido a esta información. Su trabajo es recopilar, limpiar y analizar datos para obtener respuestas y tomar mejores decisiones. En pocas palabras, los datos son una poderosa herramienta para innovar, optimizar y resolver problemas en todos los ámbitos.
+
 ======================================================================================
 
 
