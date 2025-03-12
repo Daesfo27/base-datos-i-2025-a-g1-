@@ -56,10 +56,35 @@ Los analistas de datos trabajan principalmente con "bases de datos", que son col
 
 La mayoría de las bases de datos son "relacionales", lo que significa que contienen varias tablas conectadas entre sí. Por ejemplo, una tabla puede almacenar nombres y direcciones, mientras que otra registra propiedades y sus dueños. Si hay coincidencias entre ambas, se pueden vincular, facilitando el acceso a información relevante y mejorando el análisis de datos.
 
+============================================================================================
 
 
+Cuente una historia de datos convincente:
+
+El storytelling de datos transforma los números en narrativas impactantes que facilitan la toma de decisiones empresariales. No se trata solo de gráficos y tablas, sino de conectar los puntos entre los datos y quienes deben interpretarlos.  
+
+ Una buena historia de datos combina tres elementos clave:  
+ 
+ - "Narrativa": Explica qué sucede en los datos y por qué es importante.  
+ - "Visualización": Permite detectar patrones y tendencias de manera clara.  
+ - "Datos": La base que respalda la historia con hechos concretos.  
+
+Cuando la narrativa y las visualizaciones se unen, pueden crear una historia de datos que puede influir, impulsar el cambio e involucrar a una audiencia.
+
+========================================================================================
 
 
+Tipos de visualizaciones
 
+Los analistas de datos utilizan diferentes tipos de gráficos para visualizar información cuantitativa y cualitativa. Elegir el gráfico adecuado es clave para representar los datos de manera clara y efectiva.  
 
+ "Gráficos para datos cuantitativos"  
+- "Gráfico circular (pie chart)": Muestra proporciones relativas.  
+- "Gráfico de barras y columnas": Útiles para comparaciones y rankings.  
+- "Gráfico de líneas": Ideal para analizar tendencias en el tiempo.  
+- "Gráfico de dispersión (scatter plot)": Ayuda a visualizar correlaciones.  
 
+"Gráficos para datos conceptuales" 
+Incluyen diagramas de flujo, estructuras, interrelaciones y mapas, útiles para representar ideas y procesos.  
+
+Cada gráfico tiene su propósito y elegir el adecuado permite interpretar mejor los datos y tomar decisiones más informadas. 
