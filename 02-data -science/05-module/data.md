@@ -7,4 +7,3 @@ CRISP-DM (Proceso estándar intersectorial para la minería de datos).
 KDD (Descubrimiento de conocimientos en bases de datos).
 SEMMA (Exploración, modificación, modelado y evaluación de muestras).
 
-======================================================
