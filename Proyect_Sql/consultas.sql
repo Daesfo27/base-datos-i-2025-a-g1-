@@ -1,71 +1,71 @@
 -- Consultas sql 10 
 
+-- Listar todos los libros disponibles con sus cantidades:
 
--- Muestra todos los préstamos con el nombre completo del estudiante que realizó cada préstamo
+SELECT title, author, available_quantity
+FROM book
+WHERE status = 'Disponible';
 
-SELECT p.id_loan, e.full_name AS estudiante, p.loan_date, p.return_date
-FROM loan p
-JOIN student e ON p.student_id = e.id_student;
+-- Obtener el historial de préstamos de un estudiante específico (por su ID):
 
- -- Muestra los detalles de cada préstamo con el título del libro y la cantidad disponible
+SELECT lh.registered_at, lh.action, b.title
+FROM loan_history lh
+JOIN loan l ON lh.loan_id = l.id_loan
+JOIN book b ON l.book_id = b.id_book
+WHERE l.student_id = 1
+ORDER BY lh.registered_at DESC;
 
-SELECT p.id_loan, b.title AS libro, b.cantidad_disponible
-FROM loan p
-JOIN book b ON p.book_id = b.id_book;
+-- Mostrar los préstamos activos (no devueltos) con nombre del estudiante y título del libro:
 
- -- Lista los libros prestados junto con sus categorías
+SELECT p.full_name, b.title, l.loan_date, l.return_date
+FROM loan l
+JOIN student s ON l.student_id = s.id_student
+JOIN person p ON s.person_id = p.id_person
+JOIN book b ON l.book_id = b.id_book
+WHERE l.returned = FALSE;
 
-
-SELECT b.title AS libro, c.name AS categoria
-FROM loan p
-JOIN book b ON p.book_id = b.id_book
-JOIN book_category bc ON b.id_book = bc.book_id
-JOIN category c ON bc.category_id = c.id_category;
-
--- Muestra la información de todas las notificaciones enviadas con el nombre del estudiante
-
-SELECT n.id_notification, e.full_name AS estudiante, n.message, n.date
+-- Listar estudiantes con notificaciones recientes:
+SELECT p.full_name, n.message, n.sent_at
 FROM notification n
-JOIN student e ON n.student_id = e.id_student;
+JOIN student s ON n.student_id = s.id_student
+JOIN person p ON s.person_id = p.id_person
+ORDER BY n.sent_at DESC;
 
--- Muestra el historial de préstamos con el estado y la fecha del estado para cada préstamo
+-- Obtener la cantidad total de libros por categoría:
+SELECT c.name AS category, COUNT(bc.book_id) AS total_books
+FROM category c
+JOIN book_category bc ON c.id_category = bc.category_id
+GROUP BY c.name;
 
-SELECT hp.loan_id, hp.status, hp.status_date
-FROM loan_history hp;
+-- Cantidad de préstamos realizados por cada estudiante:
+SELECT p.full_name, COUNT(l.id_loan) AS total_loans
+FROM loan l
+JOIN student s ON l.student_id = s.id_student
+JOIN person p ON s.person_id = p.id_person
+GROUP BY p.full_name
+ORDER BY total_loans DESC;
 
- -- Compara para cada libro la cantidad disponible y la cantidad prestada (cantidad de préstamos activos)
-
-SELECT b.title AS libro,
-       b.cantidad_disponible,
-       COUNT(p.id_loan) AS cantidad_prestada
-FROM book b
-LEFT JOIN loan p ON b.id_book = p.book_id
-GROUP BY b.title, b.cantidad_disponible;
-
--- Muestra la configuración actual del sistema
-
-SELECT nombre_parametro, valor_parametro
-FROM system_configuration;
-
- -- Lista todos los estudiantes junto con el número de préstamos activos que tienen
-
-SELECT e.full_name AS estudiante, COUNT(p.id_loan) AS prestamos_activos
-FROM student e
-LEFT JOIN loan p ON e.id_student = p.student_id
-GROUP BY e.full_name;
-
--- Muestra todos los libros junto con sus categorías (lista todos, aunque no tengan categoría asignada)
-
-SELECT b.title AS libro, c.name AS categoria
-FROM book b
-LEFT JOIN book_category bc ON b.id_book = bc.book_id
-LEFT JOIN category c ON bc.category_id = c.id_category;
-
- -- Muestra los libros más prestados (los que tienen más registros en préstamos)
- 
-SELECT b.title AS libro, COUNT(p.id_loan) AS total_prestamos
-FROM book b
-JOIN loan p ON b.id_book = p.book_id
+-- Libros más prestados:
+SELECT b.title, COUNT(l.id_loan) AS times_loaned
+FROM loan l
+JOIN book b ON l.book_id = b.id_book
 GROUP BY b.title
-ORDER BY total_prestamos DESC
-LIMIT 10;
+ORDER BY times_loaned DESC
+LIMIT 5;
+
+-- Listar todas las configuraciones del sistema:
+SELECT config_key, config_value, description
+FROM system_config;
+
+-- Mostrar los módulos disponibles y qué roles tienen acceso a ellos:
+SELECT m.name AS module, r.name AS role
+FROM module_role mr
+JOIN module m ON mr.module_id = m.id_module
+JOIN role r ON mr.role_id = r.id_role;
+
+-- Listar usuarios, sus roles y datos personales:
+SELECT u.username, r.name AS role, p.full_name, p.email
+FROM user u
+JOIN role_user ru ON u.id_user = ru.user_id
+JOIN role r ON ru.role_id = r.id_role
+JOIN person p ON u.person_id = p.id_person;

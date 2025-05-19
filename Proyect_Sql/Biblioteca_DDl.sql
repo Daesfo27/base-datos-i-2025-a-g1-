@@ -4,7 +4,7 @@ USE biblioteca_db;
 
 -- Seguridad y usuarios
 CREATE TABLE person (
-    id_person INT PRIMARY KEY AUTO_INCREMENT,
+    id_person INT not null primary key AUTO_INCREMENT,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100),
     phone VARCHAR(20)
@@ -62,12 +62,14 @@ CREATE TABLE form_module (
 
 -- Entidades de biblioteca
 CREATE TABLE student (
-    id_student INT PRIMARY KEY AUTO_INCREMENT,
+    id_student INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     person_id INT NOT NULL,
     grade VARCHAR(10),
-    enrollment_code VARCHAR(20),
     FOREIGN KEY (person_id) REFERENCES person(id_person)
 );
+SELECT id_student FROM student WHERE id_student BETWEEN 1 AND 50;
+
+
 
 CREATE TABLE book (
     id_book INT PRIMARY KEY AUTO_INCREMENT,
@@ -112,13 +114,16 @@ CREATE TABLE loan_history (
     FOREIGN KEY (loan_id) REFERENCES loan(id_loan)
 );
 
+DROP TABLE IF EXISTS notification;
 CREATE TABLE notification (
     id_notification INT PRIMARY KEY AUTO_INCREMENT,
     student_id INT NOT NULL,
     message TEXT,
-    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    sent_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES student(id_student)
 );
+
+
 
 CREATE TABLE system_config (
     id_config INT PRIMARY KEY AUTO_INCREMENT,

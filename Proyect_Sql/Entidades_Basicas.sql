@@ -1,4 +1,6 @@
-INSERT INTO person (full_name, email, phone) VALUES
+  SHOW CREATE TABLE person;
+  
+  INSERT INTO person (full_name, email, phone) VALUES
 ('Roldán Sanjuan', 'cfalco@hervia.com', '555-1001'),
 ('María Pilar Verdejo', 'noguestere@yahoo.com', '555-1002'),
 ('Javi Sanmartín', 'trujillolola@hotmail.com', '555-1003'),
@@ -49,6 +51,7 @@ INSERT INTO person (full_name, email, phone) VALUES
 ('Diego Valenzuela', 'galollamas@acero.com', '555-1048'),
 ('Leyre Galindo', 'vicentemaristela@yahoo.com', '555-1049'),
 ('Augusto Cabrero', 'luciaasenjo@beltran-lobo.net', '555-1050');
+SELECT * FROM person ORDER BY id_person;
 
 INSERT INTO user (username, password, person_id) VALUES
 ( 'ana.lopez', 'pass123', 1),

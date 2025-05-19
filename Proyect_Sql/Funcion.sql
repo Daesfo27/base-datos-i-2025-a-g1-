@@ -1,25 +1,25 @@
+
 -- Funcion sql 
 
--- Función para calcular el tiempo en días que un libro ha estado prestado
-
-DELIMITER $$
-
-CREATE FUNCTION dias_prestamo(fecha_prestamo DATE)
+-- Calcular días de atraso de un préstamo
+ DELIMITER //
+CREATE FUNCTION calcular_dias_atraso(fecha_devolucion DATE)
 RETURNS INT
 DETERMINISTIC
 BEGIN
-    DECLARE dias INT;
-    SET dias = DATEDIFF(CURDATE(), fecha_prestamo);
-    RETURN dias;
-END $$
+    DECLARE dias_atraso INT;
+    
+    IF CURRENT_DATE > fecha_devolucion THEN
+        SET dias_atraso = DATEDIFF(CURRENT_DATE, fecha_devolucion);
+    ELSE
+        SET dias_atraso = 0;
+    END IF;
 
+    RETURN dias_atraso;
+END;
+//
 DELIMITER ;
 
--- Para probarla:
-SELECT
-    l.id_loan,
-    s.full_name AS estudiante,
-    l.loan_date,
-    dias_prestamo(l.loan_date) AS dias_prestados
-FROM loan l
-JOIN student s ON l.student_id = s.id_student;
+SELECT id_loan, calcular_dias_atraso(return_date) AS dias_atraso
+FROM loan
+WHERE returned = FALSE;
